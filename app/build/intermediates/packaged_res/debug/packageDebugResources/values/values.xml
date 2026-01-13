@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="accessibility_description">Jarvis Core Engine for Automation and Security</string>
+    <string name="app_name">JARVIS</string>
+    <style name="Theme.Jarvis" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@android:color/holo_blue_dark</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>
