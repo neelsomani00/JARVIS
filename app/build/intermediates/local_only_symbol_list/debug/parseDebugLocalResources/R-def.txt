@@ -4,3 +4,4 @@ string accessibility_description
 string app_name
 style Theme.Jarvis
 xml accessibility_config
+xml accessibility_service_config

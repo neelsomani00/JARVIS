@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.jarvis.core.app-mergeDebugResources-43:/values-fr-rCA/values-fr-rCA.xml",
+            "outputFile": "com.jarvis.core.app-mergeDebugResources-44:/values-fr-rCA/values-fr-rCA.xml",
             "map": [
                 {
                     "source": "/home/codespace/.gradle/caches/9.2.1/transforms/0094a58a138e50cae422194691c561ca/transformed/core-1.12.0/res/values-fr-rCA/values-fr-rCA.xml",

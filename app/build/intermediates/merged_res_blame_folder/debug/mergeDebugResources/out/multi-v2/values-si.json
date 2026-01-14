@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.jarvis.core.app-mergeDebugResources-43:/values-si/values-si.xml",
+            "outputFile": "com.jarvis.core.app-mergeDebugResources-44:/values-si/values-si.xml",
             "map": [
                 {
                     "source": "/home/codespace/.gradle/caches/9.2.1/transforms/a12161011acaf2f86bd8e5b27ab4f7cb/transformed/jetified-material3-release/res/values-si/values-si.xml",

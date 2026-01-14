@@ -1,38 +1,41 @@
 package com.jarvis.core.brain
 
-import com.google.ai.client.generativeai.GenerativeModel
-import okhttp3.*
+import android.util.Log
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import okio.ByteString
+import okhttp3.Response
+import java.io.IOException
+import org.json.JSONObject
 
 class AiOrchestrator {
-    private val geminiKey = "AIzaSyBfK3WWZLUQ4Vdh8DHNpvBIOmK5yGHuw6o"
-    private val deepgramKey = "2345596ac993296fe43b0396187216b52fb5b9ad"
-    private val elevenLabsKey = "sk_8ce28158ecc07db9553818f8b5aa63b3209b1aa19f8c57be"
+    private val client = OkHttpClient()
 
-    private val generativeModel = GenerativeModel(
-        modelName = "gemini-2.0-flash",
-        apiKey = geminiKey
-    )
-
-    suspend fun think(userInput: String, screenContext: String): String? {
-        val prompt = "You are J.A.R.V.I.S. Context: $screenContext. User says: $userInput"
-        return generativeModel.generateContent(prompt).text
-    }
-
-    fun speak(text: String, callback: (ByteString) -> Unit) {
-        val client = OkHttpClient()
-        val body = """{"text":"$text", "model_id": "eleven_multilingual_v2"}""".toRequestBody("application/json".toMediaType())
+    fun sendCommand(command: String) {
+        val json = JSONObject()
+        json.put("command", command)
+        
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val body = json.toString().toRequestBody(mediaType)
+        
         val request = Request.Builder()
-            .url("https://api.elevenlabs.io/v1/text-to-speech/pNInz6obpgDQGcFmaJgB")
-            .addHeader("xi-api-key", elevenLabsKey)
-            .post(body).build()
+            .url("https://api.openai.com/v1/chat/completions") // Example URL
+            .post(body)
+            .build()
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: java.io.IOException) {}
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("Jarvis", "Network Failed", e)
+            }
+
             override fun onResponse(call: Call, response: Response) {
-                response.body?.byteString()?.let { callback(it) }
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                    Log.d("Jarvis", "Response: ${response.body?.string()}")
+                }
             }
         })
     }

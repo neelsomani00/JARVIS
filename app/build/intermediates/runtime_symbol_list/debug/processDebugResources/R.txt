@@ -1853,3 +1853,4 @@ int styleable ViewStubCompat_android_id 0
 int styleable ViewStubCompat_android_layout 1
 int styleable ViewStubCompat_android_inflatedId 2
 int xml accessibility_config 0x7f0f0000
+int xml accessibility_service_config 0x7f0f0001

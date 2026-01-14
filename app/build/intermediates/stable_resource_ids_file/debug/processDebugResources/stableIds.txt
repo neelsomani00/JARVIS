@@ -19,6 +19,7 @@ com.jarvis.core:styleable/ActionBar = 0x7f0e0000
 com.jarvis.core:style/Widget.AppCompat.TextView = 0x7f0d015c
 com.jarvis.core:style/Widget.AppCompat.Spinner.Underlined = 0x7f0d015b
 com.jarvis.core:style/Widget.AppCompat.Spinner.DropDown = 0x7f0d0159
+com.jarvis.core:xml/accessibility_service_config = 0x7f0f0001
 com.jarvis.core:style/Widget.AppCompat.SeekBar.Discrete = 0x7f0d0157
 com.jarvis.core:style/Widget.AppCompat.SeekBar = 0x7f0d0156
 com.jarvis.core:style/Widget.AppCompat.SearchView = 0x7f0d0154

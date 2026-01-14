@@ -36,10 +36,10 @@ com.jarvis.core.app-jetified-foundation-release-34 /home/codespace/.gradle/cache
 com.jarvis.core.app-jetified-ui-unit-release-35 /home/codespace/.gradle/caches/9.2.1/transforms/c87c702ec077e649a105e9e5f9fcecaf/transformed/jetified-ui-unit-release/res
 com.jarvis.core.app-jetified-animation-release-36 /home/codespace/.gradle/caches/9.2.1/transforms/cc9a1d098ee58dc9460315554579f7aa/transformed/jetified-animation-release/res
 com.jarvis.core.app-jetified-ui-geometry-release-37 /home/codespace/.gradle/caches/9.2.1/transforms/d20c35fed959419ba9ce521703773199/transformed/jetified-ui-geometry-release/res
-com.jarvis.core.app-biometric-1.1.0-38 /home/codespace/.gradle/caches/9.2.1/transforms/da0090e3b0c8cb2e625c795a67833879/transformed/biometric-1.1.0/res
-com.jarvis.core.app-jetified-ui-graphics-release-39 /home/codespace/.gradle/caches/9.2.1/transforms/e46761e3bb739b998b9b58228042a06a/transformed/jetified-ui-graphics-release/res
-com.jarvis.core.app-jetified-activity-1.8.2-40 /home/codespace/.gradle/caches/9.2.1/transforms/f543910f0a2b92d07ab4900f670b9a29/transformed/jetified-activity-1.8.2/res
-com.jarvis.core.app-pngs-41 /workspaces/JARVIS/app/build/generated/res/pngs/debug
+com.jarvis.core.app-jetified-ui-tooling-preview-release-38 /home/codespace/.gradle/caches/9.2.1/transforms/d9b50722dd266a24cb7bf02aad898b38/transformed/jetified-ui-tooling-preview-release/res
+com.jarvis.core.app-biometric-1.1.0-39 /home/codespace/.gradle/caches/9.2.1/transforms/da0090e3b0c8cb2e625c795a67833879/transformed/biometric-1.1.0/res
+com.jarvis.core.app-jetified-ui-graphics-release-40 /home/codespace/.gradle/caches/9.2.1/transforms/e46761e3bb739b998b9b58228042a06a/transformed/jetified-ui-graphics-release/res
+com.jarvis.core.app-jetified-activity-1.8.2-41 /home/codespace/.gradle/caches/9.2.1/transforms/f543910f0a2b92d07ab4900f670b9a29/transformed/jetified-activity-1.8.2/res
 com.jarvis.core.app-resValues-42 /workspaces/JARVIS/app/build/generated/res/resValues/debug
 com.jarvis.core.app-packageDebugResources-43 /workspaces/JARVIS/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
 com.jarvis.core.app-packageDebugResources-44 /workspaces/JARVIS/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir

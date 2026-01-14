@@ -1,6 +1,10 @@
 [
     {
-        "merged": "com.jarvis.core.app-debug-45:/xml_accessibility_config.xml.flat",
-        "source": "com.jarvis.core.app-main-47:/xml/accessibility_config.xml"
+        "merged": "com.jarvis.core.app-debug-46:/xml_accessibility_config.xml.flat",
+        "source": "com.jarvis.core.app-main-48:/xml/accessibility_config.xml"
+    },
+    {
+        "merged": "com.jarvis.core.app-debug-46:/xml_accessibility_service_config.xml.flat",
+        "source": "com.jarvis.core.app-main-48:/xml/accessibility_service_config.xml"
     }
 ]
