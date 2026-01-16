@@ -1,0 +1,9 @@
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/ui/JarvisCore.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/services/WakeWordService.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/ui/JarvisDashboard.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/ui/ConfigActivity.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/services/JarvisAccessibilityService.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/MainActivity.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/services/OverlayService.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/brain/AiOrchestrator.kt
+/workspaces/JARVIS/app/src/main/java/com/jarvis/core/utils/VoiceAssistant.kt

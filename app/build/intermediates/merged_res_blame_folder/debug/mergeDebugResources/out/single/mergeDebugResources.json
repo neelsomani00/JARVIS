@@ -1,10 +1,18 @@
 [
     {
-        "merged": "com.jarvis.core.app-debug-46:/xml_accessibility_config.xml.flat",
-        "source": "com.jarvis.core.app-main-48:/xml/accessibility_config.xml"
+        "merged": "com.jarvis.core.app-debug-41:/xml_accessibility_service_config.xml.flat",
+        "source": "com.jarvis.core.app-main-43:/xml/accessibility_service_config.xml"
     },
     {
-        "merged": "com.jarvis.core.app-debug-46:/xml_accessibility_service_config.xml.flat",
-        "source": "com.jarvis.core.app-main-48:/xml/accessibility_service_config.xml"
+        "merged": "com.jarvis.core.app-debug-41:/xml_backup_rules.xml.flat",
+        "source": "com.jarvis.core.app-main-43:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.jarvis.core.app-debug-41:/xml_accessibility_config.xml.flat",
+        "source": "com.jarvis.core.app-main-43:/xml/accessibility_config.xml"
+    },
+    {
+        "merged": "com.jarvis.core.app-debug-41:/xml_data_extraction_rules.xml.flat",
+        "source": "com.jarvis.core.app-main-43:/xml/data_extraction_rules.xml"
     }
 ]

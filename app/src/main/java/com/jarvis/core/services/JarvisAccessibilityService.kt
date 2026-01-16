@@ -3,48 +3,44 @@ package com.jarvis.core.services
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
-import android.widget.Toast
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
-import com.jarvis.core.brain.AiOrchestrator
-import kotlinx.coroutines.*
+import android.util.Log
 
 class JarvisAccessibilityService : AccessibilityService() {
+    companion object {
+        var instance: JarvisAccessibilityService? = null
+    }
 
-    private val scope = CoroutineScope(Dispatchers.Main + Job())
-    private val orchestrator = AiOrchestrator()
-    private var lastAuthTime: Long = 0
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        instance = this
+        Log.d("JARVIS", "Hands Connected: Accessibility Service Active")
+    }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent) {
-        val rootNode = rootInActiveWindow ?: return
-        
-        // FLEX: AI is always watching the screen context
-        val screenText = getAllText(rootNode)
-        
-        // Example logic: If 'Power Off' menu is detected, trigger Biometric
-        if (screenText.contains("Power off", ignoreCase = true)) {
-            checkUserIdentity()
-        }
+        // Future vision logic goes here
     }
 
-    private fun checkUserIdentity() {
-        val currentTime = System.currentTimeMillis()
-        if (currentTime - lastAuthTime > 900000) { // 15 minutes
-            performGlobalAction(GLOBAL_ACTION_HOME)
-            Toast.makeText(this, "Biometric Verification Required by JARVIS", Toast.LENGTH_SHORT).show()
-        }
+    override fun onInterrupt() {
+        instance = null
     }
 
-    private fun getAllText(node: AccessibilityNodeInfo): String {
-        val sb = StringBuilder()
-        sb.append(node.text ?: "")
-        for (i in 0 until node.childCount) {
-            val child = node.getChild(i)
-            if (child != null) sb.append(getAllText(child))
+    fun clickButtonByText(text: String): Boolean {
+        val rootNode = rootInActiveWindow ?: return false
+        val nodes = rootNode.findAccessibilityNodeInfosByText(text)
+        if (nodes != null && nodes.isNotEmpty()) {
+            for (node in nodes) {
+                if (node.isClickable) {
+                    node.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+                    return true
+                } else {
+                    val parent = node.parent
+                    if (parent != null && parent.isClickable) {
+                        parent.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+                        return true
+                    }
+                }
+            }
         }
-        return sb.toString()
+        return false
     }
-
-    override fun onInterrupt() {}
 }

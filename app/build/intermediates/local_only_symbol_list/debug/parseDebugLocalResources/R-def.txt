@@ -2,6 +2,8 @@ R_DEF: Internal format may change without notice
 local
 string accessibility_description
 string app_name
-style Theme.Jarvis
+style Theme.JARVIS
 xml accessibility_config
 xml accessibility_service_config
+xml backup_rules
+xml data_extraction_rules
