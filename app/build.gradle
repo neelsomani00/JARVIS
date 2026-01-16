@@ -33,7 +33,8 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.1'
+        // FIXED: Updated to 1.5.14 to match your Kotlin version
+        kotlinCompilerExtensionVersion '1.5.14'
     }
     packagingOptions {
         resources {
@@ -47,7 +48,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     implementation 'androidx.activity:activity-compose:1.8.2'
     
-    // Jetpack Compose - Fixes all "Unresolved reference" UI errors
+    // Jetpack Compose
     implementation platform('androidx.compose:compose-bom:2023.08.00')
     implementation 'androidx.compose.ui:ui'
     implementation 'androidx.compose.ui:ui-graphics'

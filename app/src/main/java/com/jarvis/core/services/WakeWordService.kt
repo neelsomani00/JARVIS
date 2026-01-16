@@ -19,13 +19,17 @@ class WakeWordService : Service() {
     }
 
     private fun initPorcupine() {
-        porcupineManager = PorcupineManager.Builder()
-            .setAccessKey("73YlFlpVmGD7eA9fsG1dk1yURfVctg0udzu9K5EafYXCBakU1CIqHg==")
-            .setKeyword(Porcupine.BuiltInKeyword.JARVIS)
-            .build(applicationContext) { 
-                toneGen.startTone(ToneGenerator.TONE_PROP_ACK, 150)
-            }
-        porcupineManager?.start()
+        try {
+            porcupineManager = PorcupineManager.Builder()
+                .setAccessKey("73YlFlpVmGD7eA9fsG1dk1yURfVctg0udzu9K5EafYXCBakU1CIqHg==")
+                .setKeyword(Porcupine.BuiltInKeyword.JARVIS)
+                .build(applicationContext) { 
+                    toneGen.startTone(ToneGenerator.TONE_PROP_ACK, 150)
+                }
+            porcupineManager?.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun createNotification(): Notification {
