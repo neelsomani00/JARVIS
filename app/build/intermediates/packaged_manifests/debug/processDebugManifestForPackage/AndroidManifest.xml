@@ -28,13 +28,10 @@
         android:extractNativeLibs="false"
         android:icon="@android:drawable/sym_def_app_icon"
         android:label="JARVIS"
-        android:roundIcon="@android:drawable/sym_def_app_icon"
-        android:supportsRtl="true"
         android:theme="@style/Theme.JARVIS" >
         <activity
             android:name="com.jarvis.core.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.JARVIS" >
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,14 +41,8 @@
 
         <service
             android:name="com.jarvis.core.services.WakeWordService"
-            android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="microphone" />
-        <service
-            android:name="com.jarvis.core.services.OverlayService"
-            android:enabled="true"
-            android:exported="false"
-            android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
         <service
             android:name="com.jarvis.core.services.JarvisAccessibilityService"
             android:exported="true"
