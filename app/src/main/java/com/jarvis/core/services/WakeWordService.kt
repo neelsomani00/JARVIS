@@ -50,6 +50,10 @@ class WakeWordService : Service() {
                 .setKeyword(Porcupine.BuiltInKeyword.JARVIS)
                 .build(applicationContext) { 
                     toneGen.startTone(ToneGenerator.TONE_PROP_ACK, 150)
+                    // Trigger the Voice Assistant via broadcast
+                    val triggerIntent = Intent("com.jarvis.ACTION_WAKE_WORD_DETECTED")
+                    triggerIntent.setPackage(packageName)
+                    sendBroadcast(triggerIntent)
                 }
             porcupineManager?.start()
         } catch (e: Exception) {
