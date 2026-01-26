@@ -19,7 +19,7 @@ class VoiceAssistant(context: Context) : TextToSpeech.OnInitListener {
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
-    fun processAndSpeak(query: String) {
+    fun processCommand(query: String) {
         orchestrator.processCommand(query) { response ->
             speak(response)
         }
