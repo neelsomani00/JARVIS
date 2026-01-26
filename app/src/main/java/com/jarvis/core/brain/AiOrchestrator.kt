@@ -9,7 +9,7 @@ import java.io.IOException
 class AiOrchestrator {
     private val client = OkHttpClient()
     // REPLACE THIS with your actual Vercel URL
-    private val bridgeUrl = "https://your-project.vercel.app/api/evolve"
+    private val bridgeUrl = "https://neel-jarvis.vercel.app/api/evolve"
 
     fun processCommand(query: String, callback: (String) -> Unit) {
         val json = JSONObject().apply {
