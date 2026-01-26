@@ -11,7 +11,7 @@
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:label="JARVIS"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.Jarvis">
         
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
