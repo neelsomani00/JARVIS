@@ -25,12 +25,12 @@ class OverlayService : Service(), LifecycleOwner, ViewModelStoreOwner, SavedStat
     private var params: WindowManager.LayoutParams? = null
     private val lifecycleRegistry = LifecycleRegistry(this)
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
-    private val viewModelStore = ViewModelStore()
     
-    // The missing link: The Voice Assistant
+    // FIX 1: Correctly implement ViewModelStoreOwner
+    override val viewModelStore = ViewModelStore()
+    
     private lateinit var voiceAssistant: VoiceAssistant
 
-    // The Receiver: Catches the "Jarvis" broadcast
     private val wakeWordReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == "com.jarvis.ACTION_WAKE_WORD_DETECTED") {
@@ -42,7 +42,6 @@ class OverlayService : Service(), LifecycleOwner, ViewModelStoreOwner, SavedStat
 
     override val lifecycle: Lifecycle get() = lifecycleRegistry
     override val savedStateRegistry: SavedStateRegistry get() = savedStateRegistryController.savedStateRegistry
-    override fun getViewModelStore(): ViewModelStore = viewModelStore
 
     override fun onCreate() {
         super.onCreate()
@@ -51,14 +50,10 @@ class OverlayService : Service(), LifecycleOwner, ViewModelStoreOwner, SavedStat
         
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         
-        // Initialize the Assistant
         voiceAssistant = VoiceAssistant(this) { userQuery, aiResponse ->
-            // This is where we handle the result. 
-            // For now, the VoiceAssistant handles speaking the response.
-            // We could update the UI here later.
+            // Handle response
         }
 
-        // Register the "Ear"
         val filter = IntentFilter("com.jarvis.ACTION_WAKE_WORD_DETECTED")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             registerReceiver(wakeWordReceiver, filter, Context.RECEIVER_EXPORTED)
@@ -85,7 +80,6 @@ class OverlayService : Service(), LifecycleOwner, ViewModelStoreOwner, SavedStat
         }
 
         composeView.setContent {
-            // Updated to pass empty lambda for onClick for now
             JarvisFloatingCore(
                 onMove = { dx, dy ->
                     params?.let {
@@ -94,7 +88,7 @@ class OverlayService : Service(), LifecycleOwner, ViewModelStoreOwner, SavedStat
                         windowManager.updateViewLayout(composeView, it)
                     }
                 },
-                onClick = { voiceAssistant.start() } // Click to talk manually
+                onClick = { voiceAssistant.start() }
             )
         }
 
@@ -111,6 +105,8 @@ class OverlayService : Service(), LifecycleOwner, ViewModelStoreOwner, SavedStat
     override fun onDestroy() {
         unregisterReceiver(wakeWordReceiver)
         voiceAssistant.shutdown()
+        // FIX 2: Clear ViewModelStore to prevent memory leaks
+        viewModelStore.clear()
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         super.onDestroy()
     }
