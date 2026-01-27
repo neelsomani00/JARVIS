@@ -35,6 +35,11 @@ android {
         compose true
     }
 
+    composeOptions {
+        // Updated to 1.5.14 to match Kotlin 1.9.24
+        kotlinCompilerExtensionVersion '1.5.14'
+    }
+
     packaging {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
