@@ -15,12 +15,14 @@ class JarvisAccessibilityService : AccessibilityService(), LifecycleOwner, ViewM
 
     private val lifecycleRegistry = LifecycleRegistry(this)
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
-    private val viewModelStore = ViewModelStore()
+    
+    // FIX: This must be public and override the interface property
+    override val viewModelStore = ViewModelStore()
+    
     private lateinit var windowManager: WindowManager
 
     override val lifecycle: Lifecycle get() = lifecycleRegistry
     override val savedStateRegistry: SavedStateRegistry get() = savedStateRegistryController.savedStateRegistry
-    override fun getViewModelStore(): ViewModelStore = viewModelStore
 
     override fun onCreate() {
         super.onCreate()
@@ -28,7 +30,6 @@ class JarvisAccessibilityService : AccessibilityService(), LifecycleOwner, ViewM
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
         
-        // Show the UI
         try {
             showFloatingBall()
         } catch (e: Exception) {
@@ -72,6 +73,7 @@ class JarvisAccessibilityService : AccessibilityService(), LifecycleOwner, ViewM
     override fun onInterrupt() {}
     override fun onDestroy() {
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        viewModelStore.clear()
         super.onDestroy()
     }
 }
