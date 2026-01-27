@@ -13,6 +13,8 @@ android {
         targetSdk 34
         versionCode 1
         versionName "1.0"
+        
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -38,6 +40,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.14'
     }
+
+    // THIS BLOCK FIXES THE packageDebug FAILURE
+    packaging {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes += 'META-INF/DEPENDENCIES'
+        }
+        jniLibs {
+            useLegacyPackaging = true
+            pickFirsts += '**/libpv_porcupine.so'
+        }
+    }
 }
 
 dependencies {
@@ -53,10 +67,10 @@ dependencies {
     // Networking
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     
-    // Lifecycle & SavedState (Fixes OverlayService errors)
+    // Lifecycle & SavedState
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
     implementation 'androidx.savedstate:savedstate-ktx:1.2.1'
 
-    // Wake Word Engine (Fixes WakeWordService errors)
+    // Wake Word Engine
     implementation 'ai.picovoice:porcupine-android:3.0.0'
 }
