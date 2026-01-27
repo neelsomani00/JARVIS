@@ -1,29 +1,77 @@
 package com.jarvis.core.services
 
 import android.accessibilityservice.AccessibilityService
+import android.content.Intent
+import android.graphics.PixelFormat
+import android.view.Gravity
+import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
-import android.view.accessibility.AccessibilityNodeInfo
-import android.widget.Toast
+import androidx.compose.ui.platform.ComposeView
+import androidx.lifecycle.*
+import androidx.savedstate.*
+import com.jarvis.core.ui.JarvisFloatingCore
 
-class JarvisAccessibilityService : AccessibilityService() {
+class JarvisAccessibilityService : AccessibilityService(), LifecycleOwner, ViewModelStoreOwner, SavedStateRegistryOwner {
 
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        // Listening for UI changes to "learn"
-    }
+    private val lifecycleRegistry = LifecycleRegistry(this)
+    private val savedStateRegistryController = SavedStateRegistryController.create(this)
+    private val viewModelStore = ViewModelStore()
+    private lateinit var windowManager: WindowManager
 
-    // This is the function the AI will call to "click" buttons for you
-    fun clickButtonByText(text: String): Boolean {
-        val rootNode = rootInActiveWindow ?: return false
-        val nodes = rootNode.findAccessibilityNodeInfosByText(text)
-        for (node in nodes) {
-            if (node.isClickable) {
-                node.performAction(AccessibilityNodeInfo.ACTION_CLICK)
-                Toast.makeText(this, "JARVIS: Clicking $text", Toast.LENGTH_SHORT).show()
-                return true
-            }
+    override val lifecycle: Lifecycle get() = lifecycleRegistry
+    override val savedStateRegistry: SavedStateRegistry get() = savedStateRegistryController.savedStateRegistry
+    override fun getViewModelStore(): ViewModelStore = viewModelStore
+
+    override fun onCreate() {
+        super.onCreate()
+        savedStateRegistryController.performRestore(null)
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+        windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        
+        // Show the UI
+        try {
+            showFloatingBall()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        return false
     }
 
+    private fun showFloatingBall() {
+        val composeView = ComposeView(this)
+        val params = WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+            PixelFormat.TRANSLUCENT
+        ).apply {
+            gravity = Gravity.TOP or Gravity.START
+            x = 100
+            y = 100
+        }
+
+        composeView.setContent {
+            JarvisFloatingCore(
+                onMove = { dx, dy ->
+                    params.x += dx
+                    params.y += dy
+                    windowManager.updateViewLayout(composeView, params)
+                },
+                onClick = { }
+            )
+        }
+
+        composeView.setViewTreeLifecycleOwner(this)
+        composeView.setViewTreeViewModelStoreOwner(this)
+        composeView.setViewTreeSavedStateRegistryOwner(this)
+
+        windowManager.addView(composeView, params)
+    }
+
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
     override fun onInterrupt() {}
+    override fun onDestroy() {
+        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+        super.onDestroy()
+    }
 }
